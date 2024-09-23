@@ -4,6 +4,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlinx.serialization) // Apply the Kotlin Serialization plugin
 }
 
 android {
@@ -13,6 +14,7 @@ android {
     buildFeatures {
         buildConfig = true  // Enable BuildConfig fields
     }
+
     defaultConfig {
         applicationId = "com.example.flixsterplus"
         minSdk = 24
@@ -38,8 +40,6 @@ android {
         }
     }
 
-
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -49,14 +49,17 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -68,7 +71,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation("com.codepath.libraries:asynchttpclient:2.2.0")
-    implementation("com.github.bumptech.glide:glide:4.12.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.github.bumptech.glide:glide:4.13.2")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
+    implementation("com.google.code.gson:gson:2.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1") // Ensure correct version
 }
