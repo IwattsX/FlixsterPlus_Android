@@ -1,5 +1,5 @@
 package com.example.flixsterplus
 
 interface OnListFragmentationListener {
-    fun onItemClick(item: MovieClass)
+    fun onItemClick(item: PersonClass)
 }

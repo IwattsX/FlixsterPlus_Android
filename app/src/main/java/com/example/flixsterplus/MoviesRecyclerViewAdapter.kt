@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class MoviesRecyclerViewAdapter (
-    private val movies : List<MovieClass>,
+    private val movies : List<PersonClass>,
     private val mListener : OnListFragmentationListener?,
 )
     : RecyclerView.Adapter<MoviesRecyclerViewAdapter.MovieViewHolder>()
 {
         inner class MovieViewHolder(val mView: View) : RecyclerView.ViewHolder(mView){
-            var mItem: MovieClass? = null
+            var mItem: PersonClass? = null
             val mMovieTitle: TextView = mView.findViewById<View>(R.id.movie_title) as TextView
             val mMovieImage: ImageView = mView.findViewById<View>(R.id.movie_image) as ImageView
 
@@ -39,8 +39,8 @@ class MoviesRecyclerViewAdapter (
         val movie = movies[position]
 
         holder.mItem = movie
-        holder.mMovieTitle.text = movie.title
-//        holder.mMovieImage = movie.MovieImageUrl
+        holder.mMovieTitle.text = movie.name
+//        holder.mMovieImage = movie.faceImage
 
         holder.mView.setOnClickListener {
             holder.mItem?.let {
@@ -51,7 +51,7 @@ class MoviesRecyclerViewAdapter (
 
 
         Glide.with(holder.mView)
-            .load("https://image.tmdb.org/t/p/w500/" + movie.MovieImageUrl)
+            .load("https://image.tmdb.org/t/p/w500/" + movie.faceImage)
             .centerInside()
             .into(holder.mMovieImage)
     }

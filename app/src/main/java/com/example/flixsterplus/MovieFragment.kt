@@ -59,12 +59,11 @@ class MovieFragment : Fragment(), OnListFragmentationListener {
                     val gson = Gson()
 
                     // Extract "results" array from the response
-                    val moviesJsonArray = response.jsonObject.getJSONArray("results")
+                    val resultsJsonArray = response.jsonObject.getJSONArray("results")
 
-                    // Convert JSON array to list of MovieClass
-                    val arrayMovieType = object : TypeToken<List<MovieClass>>() {}.type
-                    Log.v("Json data", moviesJsonArray.toString())
-                    val models: List<MovieClass> = gson.fromJson(moviesJsonArray.toString(), arrayMovieType)
+                    // Convert JSON array to list of PersonClass
+                    val arrayPersonType = object : TypeToken<List<PersonClass>>() {}.type
+                    val models: List<PersonClass> = gson.fromJson(resultsJsonArray.toString(), arrayPersonType)
 
                     // Set the adapter
                     recyclerView.adapter = MoviesRecyclerViewAdapter(models, this@MovieFragment)
@@ -85,7 +84,8 @@ class MovieFragment : Fragment(), OnListFragmentationListener {
         })
     }
 
-    override fun onItemClick(item: MovieClass) {
-        Toast.makeText(context, "Clicked: " + item.title, Toast.LENGTH_LONG).show()
+
+    override fun onItemClick(item: PersonClass) {
+        Toast.makeText(context, "Clicked: " + item.name, Toast.LENGTH_LONG).show()
     }
 }
