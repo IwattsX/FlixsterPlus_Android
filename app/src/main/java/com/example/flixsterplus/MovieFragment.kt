@@ -28,7 +28,9 @@ class MovieFragment : Fragment(), OnListFragmentationListener {
         val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
         val progressBar = view.findViewById<ContentLoadingProgressBar>(R.id.progress)
         val recyclerView = view.findViewById<RecyclerView>(R.id.list)
-        recyclerView.layoutManager = GridLayoutManager(context, 1)
+
+        // Make these span two times
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         updateAdapter(progressBar, recyclerView)
         return view
     }
@@ -45,7 +47,7 @@ class MovieFragment : Fragment(), OnListFragmentationListener {
         val params = RequestParams()
         params["api_key"] = API_KEY
 
-        client.get("https://api.themoviedb.org/3/movie/now_playing", params, object : JsonHttpResponseHandler() {
+        client.get("https://api.themoviedb.org/3/person/popular", params, object : JsonHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
                 headers: Headers,

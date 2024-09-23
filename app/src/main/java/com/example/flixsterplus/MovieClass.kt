@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 class MovieClass {
 
     @JvmField
-    @SerializedName("title")
+    @SerializedName("name")
     var title: String? = null
 
     @JvmField
-    @SerializedName("poster_path")
+    @SerializedName("profile_path")
     var MovieImageUrl: String ?= null
 
 

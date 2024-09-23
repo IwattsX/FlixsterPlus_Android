@@ -17,7 +17,6 @@ class MoviesRecyclerViewAdapter (
         inner class MovieViewHolder(val mView: View) : RecyclerView.ViewHolder(mView){
             var mItem: MovieClass? = null
             val mMovieTitle: TextView = mView.findViewById<View>(R.id.movie_title) as TextView
-            val mMovieDescription : TextView = mView.findViewById<View>(R.id.movie_description) as TextView
             val mMovieImage: ImageView = mView.findViewById<View>(R.id.movie_image) as ImageView
 
 
@@ -41,7 +40,6 @@ class MoviesRecyclerViewAdapter (
 
         holder.mItem = movie
         holder.mMovieTitle.text = movie.title
-        holder.mMovieDescription.text = movie.description
 //        holder.mMovieImage = movie.MovieImageUrl
 
         holder.mView.setOnClickListener {
