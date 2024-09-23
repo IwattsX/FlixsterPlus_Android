@@ -47,9 +47,17 @@ class MoviesRecyclerViewAdapter (
                 val context = holder.mView.context
                 val intent = Intent(context, DetailActivity::class.java)
 
-                // Pass any necessary data to DetailActivity using the intent
+                // Pass movie data to the detail activity
                 intent.putExtra("MOVIE_NAME", movie.name)
                 intent.putExtra("MOVIE_IMAGE", movie.faceImage)
+
+                // Convert List<KnownFor> to ArrayList<KnownFor>
+                val knownForArrayList = ArrayList(movie.knownFor ?: emptyList())
+
+                // Pass the knownFor list to the intent if it exists
+                if (knownForArrayList.isNotEmpty()) {
+                    intent.putParcelableArrayListExtra("KNOWN_FOR_LIST", knownForArrayList)
+                }
 
                 // Start the DetailActivity
                 context.startActivity(intent)
@@ -61,6 +69,7 @@ class MoviesRecyclerViewAdapter (
             .centerInside()
             .into(holder.mMovieImage)
     }
+
 
 
 

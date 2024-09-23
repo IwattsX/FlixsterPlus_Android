@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/movie_image"
+        android:id="@+id/person_image"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/a_image_of_a_movie"
@@ -13,11 +13,43 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/movie_title"
+        android:id="@+id/person_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceHeadline6"
-        app:layout_constraintTop_toBottomOf="@+id/movie_image"
+        app:layout_constraintTop_toBottomOf="@+id/person_image"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/movie_poster"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/person_image"
+        />
+    <TextView
+        android:id="@+id/movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/person_title"
+        app:layout_constraintLeft_toRightOf="@+id/person_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_poster"
+
+
+    />
+
+    <TextView
+        android:id="@+id/overview"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/movie_title"
+        app:layout_constraintEnd_toEndOf="parent"
+
+         />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.example.flixsterplus
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class PersonClass(
@@ -14,15 +16,36 @@ data class PersonClass(
 )
 
 data class KnownFor(
-    @SerializedName("title")
-    var title: String? = null,
+    @SerializedName("title") val title: String?,
+    @SerializedName("poster_path") val posterPath: String?,
+    @SerializedName("overview") val overview: String?
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    )
 
-    @SerializedName("poster_path")
-    var posterPath: String? = null,
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(title)
+        parcel.writeString(posterPath)
+        parcel.writeString(overview)
+    }
 
-    @SerializedName("overview")
-    var overview: String? = null
-)
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<KnownFor> {
+        override fun createFromParcel(parcel: Parcel): KnownFor {
+            return KnownFor(parcel)
+        }
+
+        override fun newArray(size: Int): Array<KnownFor?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 
 
