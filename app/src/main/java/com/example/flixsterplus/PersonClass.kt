@@ -2,38 +2,28 @@ package com.example.flixsterplus
 
 import com.google.gson.annotations.SerializedName
 
-class PersonClass {
-
-    @JvmField
-    @SerializedName("id")
-    var id: Int = 0
-
-    @JvmField
+data class PersonClass(
     @SerializedName("name")
-    var name: String? = null
+    var name: String? = null,
 
-    @JvmField
     @SerializedName("profile_path")
-    var faceImage: String? = null
+    var faceImage: String? = null,
 
-    @JvmField
     @SerializedName("known_for")
-    var knownFor: List<MovieClass>? = null // Use MovieClass instead of String
-}
+    var knownFor: List<KnownFor>? = null // Change this to a list of KnownFor objects
+)
 
-class MovieClass {
-    @JvmField
+data class KnownFor(
     @SerializedName("title")
-    var title: String? = null
+    var title: String? = null,
 
-    @JvmField
     @SerializedName("poster_path")
-    var posterImage: String? = null
+    var posterPath: String? = null,
 
-    @JvmField
     @SerializedName("overview")
-    var description: String? = null
-}
+    var overview: String? = null
+)
+
 
 
 /**

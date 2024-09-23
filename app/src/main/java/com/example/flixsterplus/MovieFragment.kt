@@ -48,22 +48,21 @@ class MovieFragment : Fragment(), OnListFragmentationListener {
         params["api_key"] = API_KEY
 
         client.get("https://api.themoviedb.org/3/person/popular", params, object : JsonHttpResponseHandler() {
-            override fun onSuccess(
-                statusCode: Int,
-                headers: Headers,
-                response: JsonHttpResponseHandler.JSON
-            ) {
+            override fun onSuccess(statusCode: Int, headers: Headers, response: JsonHttpResponseHandler.JSON) {
                 progressBar.hide()
 
                 try {
                     val gson = Gson()
+                    val moviesJsonArray = response.jsonObject.getJSONArray("results")
+                    val arrayMovieType = object : TypeToken<List<PersonClass>>() {}.type
+                    val models: List<PersonClass> = gson.fromJson(moviesJsonArray.toString(), arrayMovieType)
 
-                    // Extract "results" array from the response
-                    val resultsJsonArray = response.jsonObject.getJSONArray("results")
-
-                    // Convert JSON array to list of PersonClass
-                    val arrayPersonType = object : TypeToken<List<PersonClass>>() {}.type
-                    val models: List<PersonClass> = gson.fromJson(resultsJsonArray.toString(), arrayPersonType)
+                    // Iterate over each person
+                    for (person in models) {
+                        person.knownFor?.forEach { knownMovie ->
+                            Log.d("Known Movie", "Title: ${knownMovie.title}, Overview: ${knownMovie.overview}")
+                        }
+                    }
 
                     // Set the adapter
                     recyclerView.adapter = MoviesRecyclerViewAdapter(models, this@MovieFragment)
@@ -72,17 +71,13 @@ class MovieFragment : Fragment(), OnListFragmentationListener {
                 }
             }
 
-            override fun onFailure(
-                statusCode: Int,
-                headers: Headers?,
-                errorResponse: String,
-                t: Throwable?
-            ) {
+            override fun onFailure(statusCode: Int, headers: Headers?, errorResponse: String, t: Throwable?) {
                 progressBar.hide()
                 Log.e("MovieFragment", "Error: $errorResponse", t)
             }
         })
     }
+
 
 
     override fun onItemClick(item: PersonClass) {

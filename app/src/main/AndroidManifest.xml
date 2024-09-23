@@ -23,6 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!-- Declare your detail activity here -->
+        <activity
+            android:name=".DetailActivity"
+            android:exported="true">
+            <!-- Optionally, you can define an intent filter if needed -->
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.flixsterplus
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,21 +41,28 @@ class MoviesRecyclerViewAdapter (
 
         holder.mItem = movie
         holder.mMovieTitle.text = movie.name
-//        holder.mMovieImage = movie.faceImage
 
         holder.mView.setOnClickListener {
-            holder.mItem?.let {
-                movie ->
-                mListener?.onItemClick(movie)
+            holder.mItem?.let { movie ->
+                val context = holder.mView.context
+                val intent = Intent(context, DetailActivity::class.java)
+
+                // Pass any necessary data to DetailActivity using the intent
+                intent.putExtra("MOVIE_NAME", movie.name)
+                intent.putExtra("MOVIE_IMAGE", movie.faceImage)
+
+                // Start the DetailActivity
+                context.startActivity(intent)
             }
         }
-
 
         Glide.with(holder.mView)
             .load("https://image.tmdb.org/t/p/w500/" + movie.faceImage)
             .centerInside()
             .into(holder.mMovieImage)
     }
+
+
 
 
 }
